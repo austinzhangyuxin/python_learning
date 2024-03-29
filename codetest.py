@@ -21,3 +21,5 @@ elif a < b:  # 'elif' needs to be followed by a statement (here the statement is
 #     print("a is greater than b")
 # else:
 #     print("a is not greater than b")
+name = input("what is your name?:")
+print(name + hello)
