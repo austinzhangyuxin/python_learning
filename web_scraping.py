@@ -74,13 +74,12 @@ def scrape_website(url, max_depth=3):
                 crawl(linked_url, depth + 1)
 
     crawl(url, 1)
-
-    return emails
+    return sorted(emails)
 
 
 # Example usage
-url = 'https://example.com'  # Replace with the URL of the website you want to scrape
-emails = scrape_website(url)
+url = input("Input your website to crawl: ")  # Replace with the URL of the website you want to scrape
+emails = scrape_website(url, max_depth=10)
 
 # Print or process the extracted email addresses
 for email in emails:
