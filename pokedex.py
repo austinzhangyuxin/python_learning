@@ -32,6 +32,7 @@ def get_pokemon_info(pokedex_number):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+
 if __name__ == "__main__":
     try:
         pokedex_number = int(input("Enter a Pokedex number: "))

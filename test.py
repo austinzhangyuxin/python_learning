@@ -1,4 +1,4 @@
-"""print("Hello World!")  # this line prints "Hello World!"
+print("Hello World!")  # this line prints "Hello World!"
 
 # this line asks for user input at runtime
 name = input("What is your name? ")
@@ -38,4 +38,4 @@ def guess(x):
     print(f'Yay,you have guess the number {random_number}')
 
 
-guess(10)"""
+guess(10)
