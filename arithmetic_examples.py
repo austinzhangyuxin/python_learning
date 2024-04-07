@@ -40,3 +40,5 @@ print(3 % 2)
 print(4 % 2)
 
 print(math.pi)
+
+print(10/3)
