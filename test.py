@@ -79,3 +79,12 @@ elif marks > 40:
     print("Pass")
 else:
     print("Fail")
+
+# Replace ___ with your code
+
+# get integer input from the user
+number = int(input())
+
+# check if the number is not divisible by 3
+# and print the result
+print(number % 3 != 0)
