@@ -57,34 +57,59 @@
 
 # Replace ___ with your code
 
-marks = int(input("marks: "))
-
-# check if Pass or Fail using if…else statement
-if marks > 40:
-    print("pass")
-elif marks == 40:
-    print("all_right")
-else:
-    print("fail")
-
 # Replace ___ with your code
 
-marks = int(input())
+# get integer input from the user
+#number = int(input())
 
-# check if user has entered valid marks or not
-# also check if the student passed or failed
-if marks > 100 or marks < 0:
-    print("Invalid Marks")
-elif marks > 40:
-    print("Pass")
-else:
-    print("Fail")
+# check if the number is not divisible by 3
+# and print the result
+# print(number % 3 != 0)
 
 # Replace ___ with your code
 
 # get integer input from the user
-number = int(input())
+# number = int(input())
+#
+# check if number is positive, negative or 0
+# if number > 0:
+#     print("positive")
+# elif number < 0:
+#     print("negative")
+# else:
+#     print("zero")
+#
+# # Replace ___ with your code
+#
+# # get integer input from the user
+# number = int(input("number: "))
+#
+# # check odd/even
+# if number % 2 == 0:
+#     print("even")
+# else:
+#     print("odd")
 
-# check if the number is not divisible by 3
-# and print the result
-print(number % 3 != 0)
+number = 1
+
+while number <= 10:
+    print(f"Number: {number}")
+    number += 2
+
+# # Replace ___ with your code
+
+# # get integer input from the user
+# n = int(input("n: "))
+
+# # use a while loop to print numbers from n to 1
+# number = 1
+# while number <= n:
+#     print(f"Number: {number}")
+
+# get integer input from the user
+n = int(input())
+
+i = n
+while i >= 1:
+    print(i)
+    i = i - 1

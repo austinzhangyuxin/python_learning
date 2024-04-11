@@ -2,7 +2,7 @@ age1 = 21
 age2 = 18
 
 # 21 less than 21 is False
-print(age1 < 21)
+print(age1 <= 21)
 
 # 21 less than or equal to 21 is True
 print(age1 <= 21)
@@ -37,3 +37,32 @@ var2 = input("var2: ")
 
 # check if two strings are equal and print the result
 print(f"{var1 == var2}")
+
+# Replace ___ with your code
+
+# get age input from the user
+age = int(input("age: "))
+
+# if age is 18 or above, print "The person can vote."
+# if not, don't print anything
+if age >= 18:
+    print("The person can vote.")
+
+    # Replace ___ with your code
+
+    traffic_signal = (input("traffic_signal"))
+
+    # write your code here
+    if traffic_signal == "red":
+        print("The red light is on.")
+        print("Stop the vehicle.")
+
+    print("Have a good day!")
+
+# Replace ___ with your code
+
+count = 1
+while count <= 7:
+    print("Learning Python with Programiz.")
+
+    count += 1
