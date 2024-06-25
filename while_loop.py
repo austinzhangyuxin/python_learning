@@ -67,3 +67,50 @@ print('You are indeed learning', topic)
 # You are not learning Java
 # What are you learning? Python
 # You are indeed learning Python
+
+
+import random
+
+
+def play_game():
+    lower_bound = 1
+    upper_bound = 100
+    secret_number = random.randint(lower_bound, upper_bound)
+    attempts = 0
+    max_attempts = 7
+
+    print(f"Welcome to the Number Guessing Game! Guess the number between {lower_bound} and {upper_bound}.")
+
+    while True:
+        guess = input("Enter your guess (or 'q' to quit): ")
+
+        if guess.lower() == 'q':
+            print(f"The secret number was {secret_number}. Better luck next time!")
+            break
+
+        try:
+            guess = int(guess)
+            attempts += 1
+
+            if guess < lower_bound or guess > upper_bound:
+                print(f"Please enter a number between {lower_bound} and {upper_bound}.")
+                continue
+
+            if guess < secret_number:
+                print("Too low! Try again.")
+            elif guess > secret_number:
+                print("Too high! Try again.")
+            else:
+                print(f"Congratulations! You guessed the number {secret_number} in {attempts} attempts.")
+                break
+
+            if attempts >= max_attempts:
+                print(f"Sorry, you ran out of attempts. The secret number was {secret_number}.")
+                break
+
+        except ValueError:
+            print("Invalid input. Please enter a valid number or 'q' to quit.")
+
+
+if __name__ == "__main__":
+    play_game()

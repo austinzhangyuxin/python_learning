@@ -23,3 +23,34 @@ n = int(input("enter a number: "))
 for i in range(6, 10):
     product = n * i
     print(f"{n} times {i} is {product}")
+
+
+# --------------------------
+
+def generate_multiplication_table(rows, cols):
+    # Print header row
+    header = "     |"
+    for col in range(1, cols + 1):
+        header += f" {col:4}"
+    print(header)
+    print("-" * (len(header)))
+
+    # Print table rows
+    for row in range(1, rows + 1):
+        line = f" {row:3} |"
+        for col in range(1, cols + 1):
+            line += f" {row * col:4}"
+        print(line)
+
+
+def main():
+    print("Welcome to the Advanced Multiplication Table Generator!")
+    print("Enter the range for the table (1 to n):")
+    rows = int(input("Enter number of rows: "))
+    cols = int(input("Enter number of columns: "))
+
+    generate_multiplication_table(rows, cols)
+
+
+if __name__ == "__main__":
+    main()
