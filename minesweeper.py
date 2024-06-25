@@ -89,3 +89,117 @@ if __name__ == "__main__":
     num_mines = 5
     game = Minesweeper(size, num_mines)
     game.play()
+
+
+import tkinter as tk
+import random
+
+class Minesweeper:
+    def __init__(self, root, rows, cols, num_mines):
+        self.root = root
+        self.rows = rows
+        self.cols = cols
+        self.num_mines = num_mines
+
+        self.board = [[0] * cols for _ in range(rows)]
+        self.mines = set()
+        self.revealed = [[False] * cols for _ in range(rows)]
+
+        self.create_widgets()
+
+        self.generate_mines()
+        self.calculate_numbers()
+
+    def create_widgets(self):
+        self.buttons = [[None] * self.cols for _ in range(self.rows)]
+
+        for row in range(self.rows):
+            for col in range(self.cols):
+                btn = tk.Button(self.root, text="", width=3, height=1, font=('Arial', 10),
+                                command=lambda r=row, c=col: self.click(r, c))
+                btn.grid(row=row, column=col)
+                self.buttons[row][col] = btn
+
+    def generate_mines(self):
+        while len(self.mines) < self.num_mines:
+            row = random.randint(0, self.rows - 1)
+            col = random.randint(0, self.cols - 1)
+            self.mines.add((row, col))
+            self.board[row][col] = -1  # -1 represents a mine
+
+    def calculate_numbers(self):
+        directions = [(-1, -1), (-1, 0), (-1, 1),
+                      (0, -1),          (0, 1),
+                      (1, -1), (1, 0), (1, 1)]
+
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if self.board[row][col] == -1:
+                    continue  # skip if it's a mine
+
+                count = 0
+                for d_row, d_col in directions:
+                    new_row, new_col = row + d_row, col + d_col
+                    if 0 <= new_row < self.rows and 0 <= new_col < self.cols:
+                        if self.board[new_row][new_col] == -1:
+                            count += 1
+                self.board[row][col] = count
+
+    def click(self, row, col):
+        if (row, col) in self.mines:
+            self.buttons[row][col].config(text="*", state=tk.DISABLED)
+            self.reveal_board()
+            tk.messagebox.showinfo("Game Over", "You clicked on a mine! Game over.")
+        else:
+            self.reveal(row, col)
+            if self.check_win():
+                tk.messagebox.showinfo("Congratulations", "You win!")
+
+    def reveal(self, row, col):
+        if self.revealed[row][col]:
+            return
+
+        self.revealed[row][col] = True
+        self.buttons[row][col].config(text=self.board[row][col], state=tk.DISABLED)
+
+        if self.board[row][col] == 0:
+            directions = [(-1, -1), (-1, 0), (-1, 1),
+                          (0, -1),          (0, 1),
+                          (1, -1), (1, 0), (1, 1)]
+            for d_row, d_col in directions:
+                new_row, new_col = row + d_row, col + d_col
+                if 0 <= new_row < self.rows and 0 <= new_col < self.cols:
+                    self.reveal(new_row, new_col)
+
+    def reveal_board(self):
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if (row, col) in self.mines:
+                    self.buttons[row][col].config(text="*", state=tk.DISABLED)
+                else:
+                    self.buttons[row][col].config(text=self.board[row][col], state=tk.DISABLED)
+
+    def check_win(self):
+        for row in range(self.rows):
+            for col in range(self.cols):
+                if (row, col) not in self.mines and not self.revealed[row][col]:
+                    return False
+        return True
+
+
+def main():
+    root = tk.Tk()
+    root.title("Minesweeper")
+
+    # Define the size of the board and number of mines
+    rows = 8
+    cols = 8
+    num_mines = 10
+
+    minesweeper = Minesweeper(root, rows, cols, num_mines)
+
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()

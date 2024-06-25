@@ -175,3 +175,67 @@ length_of_list = custom_length(my_list)
 
 # Print the result
 print(f"{length_of_list}")
+
+import tkinter as tk
+import random
+
+
+class MemoryGame:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Memory Game")
+
+        # List of numbers for the game
+        self.numbers = list(range(1, 9)) * 2  # Two of each number from 1 to 8
+        random.shuffle(self.numbers)
+
+        # Create buttons for the game
+        self.buttons = []
+        for i in range(4):
+            for j in range(4):
+                btn = tk.Button(root, text=" ", width=5, height=2,
+                                command=lambda row=i, col=j: self.click(row, col))
+                btn.grid(row=i, column=j, padx=5, pady=5)
+                self.buttons.append(btn)
+
+        self.first_click = None  # Stores the first clicked button
+        self.num_clicks = 0      # Count number of clicks
+        self.pairs_found = 0     # Count number of pairs found
+
+    def click(self, row, col):
+        index = row * 4 + col
+        btn = self.buttons[index]
+
+        if btn.cget('text') != ' ':
+            return
+
+        number = self.numbers[index]
+        btn.config(text=str(number), state=tk.DISABLED)
+        self.num_clicks += 1
+
+        if self.num_clicks % 2 == 1:
+            self.first_click = (row, col)
+        else:
+            r, c = self.first_click
+            if self.numbers[r * 4 + c] == number:
+                self.pairs_found += 1
+                if self.pairs_found == len(self.numbers) // 2:
+                    tk.messagebox.showinfo("Congratulations", "You found all pairs!")
+            else:
+                self.root.after(1000, lambda: self.hide_buttons((r, c), (row, col)))
+
+    def hide_buttons(self, pos1, pos2):
+        r1, c1 = pos1
+        r2, c2 = pos2
+        self.buttons[r1 * 4 + c1].config(text=' ', state=tk.NORMAL)
+        self.buttons[r2 * 4 + c2].config(text=' ', state=tk.NORMAL)
+
+
+def main():
+    root = tk.Tk()
+    app = MemoryGame(root)
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()

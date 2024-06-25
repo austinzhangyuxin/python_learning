@@ -106,3 +106,53 @@ def get_choice_name(choice):
 if __name__ == "__main__":
     print("Welcome to the Advanced Rock, Paper, Scissors Game!")
     play_game()
+
+import tkinter as tk
+import random
+
+
+class RockPaperScissors:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Rock, Paper, Scissors")
+
+        # Choices
+        self.choices = ["Rock", "Paper", "Scissors"]
+
+        # Label to display result
+        self.result_label = tk.Label(root, text="", font=('Arial', 18))
+        self.result_label.grid(row=0, column=0, columnspan=3, padx=10, pady=10)
+
+        # Buttons for player choices
+        buttons = [
+            ('Rock', 1, 0), ('Paper', 1, 1), ('Scissors', 1, 2)
+        ]
+
+        for (text, row, column) in buttons:
+            button = tk.Button(root, text=text, padx=20, pady=20, font=('Arial', 14), command=lambda t=text: self.play(t))
+            button.grid(row=row+1, column=column, padx=10, pady=10)
+
+    def play(self, player_choice):
+        computer_choice = random.choice(self.choices)
+        result = self.determine_winner(player_choice, computer_choice)
+        self.result_label.config(text=f"Your choice: {player_choice}\nComputer's choice: {computer_choice}\nResult: {result}")
+
+    def determine_winner(self, player_choice, computer_choice):
+        if player_choice == computer_choice:
+            return "It's a tie!"
+        elif (player_choice == "Rock" and computer_choice == "Scissors") or \
+             (player_choice == "Paper" and computer_choice == "Rock") or \
+             (player_choice == "Scissors" and computer_choice == "Paper"):
+            return "You win!"
+        else:
+            return "Computer wins!"
+
+
+def main():
+    root = tk.Tk()
+    app = RockPaperScissors(root)
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
