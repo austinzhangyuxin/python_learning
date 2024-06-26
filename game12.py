@@ -28,8 +28,8 @@ class ZombieShootingGame:
         zombie_x = random.randint(50, 750)
         zombie_y = random.randint(50, 550)
         zombie = self.canvas.create_rectangle(zombie_x, zombie_y,
-                                             zombie_x + zombie_size, zombie_y + zombie_size,
-                                             fill='green')
+                                              zombie_x + zombie_size, zombie_y + zombie_size,
+                                              fill='green')
         self.zombies.append(zombie)
 
     def move_zombies(self):
@@ -56,7 +56,7 @@ class ZombieShootingGame:
             zombie_center_y = (zombie_coords[1] + zombie_coords[3]) / 2
 
             if (abs(player_center_x - zombie_center_x) < 20 and
-                abs(player_center_y - zombie_center_y) < 20):
+                    abs(player_center_y - zombie_center_y) < 20):
                 self.game_over()
 
     def game_over(self):
