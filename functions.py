@@ -206,3 +206,119 @@ print(total)  # Output: 55
 
 total = compute_sum(100)
 print(total)  # Output: 5050
+
+
+def check(marks):
+    """
+    Function to check if the marks are greater than or equal to 40.
+    Prints 'Pass' if the marks are >= 40, otherwise prints 'Fail'.
+    """
+    if marks >= 40:
+        print("Pass")
+    else:
+        print("Fail")
+
+
+def main():
+    # Take user input for marks
+    marks = int(input("Enter the marks: "))
+
+    # Call the check function with the user input marks
+    check(marks)
+
+
+if __name__ == "__main__":
+    main()
+
+
+def my_function(num1, num2):
+    """
+    Function to check if two numbers are equal.
+    Returns True if they are equal, otherwise returns False.
+    """
+    return num1 == num2
+
+
+def main():
+    # Get two integer inputs from the user
+    num1 = int(input("Enter the first number: "))
+    num2 = int(input("Enter the second number: "))
+
+    # Call the my_function with the two numbers and print the returned value
+    result = my_function(num1, num2)
+    print(result)
+
+
+if __name__ == "__main__":
+    main()
+
+
+def print_numbers():
+    """
+    Function to print the numbers 5 and 100.
+    """
+    print(5)
+    print(100)
+
+
+def main():
+    # Call the print_numbers function two times
+    print_numbers()
+    print_numbers()
+
+
+if __name__ == "__main__":
+    main()
+
+
+def full_name(first_name, last_name):
+    """
+    Function to print the full name.
+    Prints the first name and last name separated by a space.
+    """
+    print(first_name, last_name)
+
+
+def main():
+    # Take string input for first name and last name
+    first = input("Enter your first name: ")
+    last = input("Enter your last name: ")
+
+    # Call the full_name function with the first and last name as arguments
+    full_name(first, last)
+
+
+if __name__ == "__main__":
+    main()
+
+
+def check_prime(number):
+    """
+    Function to check if a number is a prime number.
+    """
+    flag = 0
+
+    # Run a loop from 2 to number - 1
+    for i in range(2, number):
+        # Check if number is divisible by i
+        if number % i == 0:
+            flag = 1
+            break
+
+    # Check the flag variable and print the result
+    if flag == 1:
+        print("Not a Prime Number")
+    else:
+        print("Prime Number")
+
+
+def main():
+    # Get an integer input for the number variable
+    number = int(input("Enter an integer: "))
+
+    # Call the check_prime function and pass number as an argument
+    check_prime(number)
+
+
+if __name__ == "__main__":
+    main()
