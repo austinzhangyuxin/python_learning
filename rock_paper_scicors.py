@@ -156,3 +156,101 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+import tkinter as tk
+import random
+
+
+class RockPaperScissorsGame:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Rock-Paper-Scissors Game")
+        self.user_score = 0
+        self.computer_score = 0
+        self.rounds = 5
+        self.current_round = 0
+
+        self.choices = ["Rock", "Paper", "Scissors"]
+
+        self.create_widgets()
+        self.update_scores()
+
+    def create_widgets(self):
+        self.label = tk.Label(self.master, text="Choose Rock, Paper, or Scissors", font=("Arial", 16))
+        self.label.pack(pady=10)
+
+        self.buttons_frame = tk.Frame(self.master)
+        self.buttons_frame.pack(pady=10)
+
+        self.rock_button = tk.Button(self.buttons_frame, text="Rock", command=lambda: self.play("Rock"))
+        self.rock_button.grid(row=0, column=0, padx=5)
+
+        self.paper_button = tk.Button(self.buttons_frame, text="Paper", command=lambda: self.play("Paper"))
+        self.paper_button.grid(row=0, column=1, padx=5)
+
+        self.scissors_button = tk.Button(self.buttons_frame, text="Scissors", command=lambda: self.play("Scissors"))
+        self.scissors_button.grid(row=0, column=2, padx=5)
+
+        self.result_label = tk.Label(self.master, text="", font=("Arial", 14))
+        self.result_label.pack(pady=10)
+
+        self.score_label = tk.Label(self.master, text="", font=("Arial", 14))
+        self.score_label.pack(pady=10)
+
+    def play(self, user_choice):
+        if self.current_round >= self.rounds:
+            self.result_label.config(text="Game over! Reset to play again.")
+            return
+
+        computer_choice = random.choice(self.choices)
+        result = self.determine_winner(user_choice, computer_choice)
+        self.current_round += 1
+
+        if result == "User":
+            self.user_score += 1
+            self.result_label.config(text=f"You chose {user_choice}, Computer chose {computer_choice}. You win this round!")
+        elif result == "Computer":
+            self.computer_score += 1
+            self.result_label.config(text=f"You chose {user_choice}, Computer chose {computer_choice}. Computer wins this round!")
+        else:
+            self.result_label.config(text=f"You chose {user_choice}, Computer chose {computer_choice}. It's a draw!")
+
+        self.update_scores()
+
+        if self.current_round >= self.rounds:
+            self.announce_winner()
+
+    def determine_winner(self, user_choice, computer_choice):
+        if user_choice == computer_choice:
+            return "Draw"
+        elif (user_choice == "Rock" and computer_choice == "Scissors") or \
+             (user_choice == "Paper" and computer_choice == "Rock") or \
+             (user_choice == "Scissors" and computer_choice == "Paper"):
+            return "User"
+        else:
+            return "Computer"
+
+    def update_scores(self):
+        self.score_label.config(text=f"User Score: {self.user_score} | Computer Score: {self.computer_score} | Round: {self.current_round}/{self.rounds}")
+
+    def announce_winner(self):
+        if self.user_score > self.computer_score:
+            winner = "You are the overall winner!"
+        elif self.computer_score > self.user_score:
+            winner = "Computer is the overall winner!"
+        else:
+            winner = "It's a draw overall!"
+
+        self.result_label.config(text=winner)
+
+
+def main():
+    root = tk.Tk()
+    game = RockPaperScissorsGame(root)
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
